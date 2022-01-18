@@ -35,6 +35,7 @@ function OrderOnline() {
       });
   }, [reduxState]);
 
+  console.log(menu)
   return (
     <>
       <div className="w-full h-screen flex">

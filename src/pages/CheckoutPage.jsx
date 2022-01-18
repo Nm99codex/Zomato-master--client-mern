@@ -5,7 +5,7 @@ import { BsShieldLockFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
 //Razorpay
-import Razorpay from "razorpay";
+import Razorpay from 'razorpay';
 
 // components
 import FoodItem from "../components/Cart/FoodItem";
@@ -34,7 +34,7 @@ function CheckoutPage() {
 
   const payNow = () => {
     let options = {
-      key: "rzp_test_q1aD8S4CGOEb75",
+      key: "rzp_test_4eVpNXfCd8V6jV",
       amount:
         reduxStateCart.reduce(
           (total, current) => total + current.totalPrice,
@@ -58,7 +58,7 @@ function CheckoutPage() {
       },
     };
 
-    let razorPay = new window.Razorpay(options);
+    const razorPay = new window.Razorpay(options);
     razorPay.open();
   };
 

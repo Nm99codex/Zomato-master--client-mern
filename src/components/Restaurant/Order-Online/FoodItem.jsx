@@ -18,11 +18,13 @@ function FoodItem(props) {
     dispatch(getFood(props._id))
       .then((data) => {
         setFood(data.payload.foods);
-        dispatch(getImage(data.payload.foods.photos)).then((data) => {
-          const { images } = data.payload;
-          images.length &&
-            setFood((prev) => ({ ...prev, image: images[0].location }));
-        });
+        dispatch(getImage(data.payload.foods))
+          .then((data) => {
+            const photos = data.payload;
+            // console.log(images)
+            setFood((prev) => ({ ...prev, image: photos }));
+            console.log(food)
+          });
         return data.payload.foods;
       })
       .then((data) => {
@@ -34,7 +36,6 @@ function FoodItem(props) {
         });
       });
   }, [reduxState]);
-  console.log(reduxState)
 
   const addFoodToCart = () => {
     dispatch(addToCart({ ...food, quantity: 1, totalPrice: food.price }));
@@ -49,7 +50,7 @@ function FoodItem(props) {
             {food?.image && (
               <div className="w-3/2 h-24 w-24 md:h-28 md:w-28 lg:h-36 lg:w-36 rounded-md overflow-hidden">
                 <img
-                  src={food?.image}
+                  src={food?.photos}
                   alt="food item"
                   className="w-full h-full object-cover object-center"
                 />
@@ -99,3 +100,24 @@ function FoodItem(props) {
 }
 
 export default FoodItem;
+
+
+// {
+//   "_id": {
+//       "$oid": "61dff74cfa5166f6b08ab587"
+//   },
+//   "menus": [{
+//       "_id": {
+//           "$oid": "61dff767fa5166f6b08ab588"
+//       },
+//       "name": "Recommended",
+//       "items": [{
+//           "$oid": "61dff782fa5166f6b08ab589"
+//       }, {
+//           "$oid": "61dff78cfa5166f6b08ab58a"
+//       }]
+//   }],
+//   "recommended": {
+//       "$oid": "61dff7a2fa5166f6b08ab58b"
+//   }
+// }

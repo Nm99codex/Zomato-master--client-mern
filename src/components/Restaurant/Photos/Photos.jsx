@@ -43,7 +43,7 @@ function Photos() {
         />
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 z-30 lg:grid-cols-5 gap-3">
         {photos.map((photo, index) => (
           <PhotoCollection
             key={index}

@@ -20,15 +20,15 @@ function RestaurantCard(props) {
         setImage((prev) => ({ ...prev, images }));
       });
   }, [props.photos]);
-  console.log(image)
+  console.log(props)
 
   return (
     <Link
       to={`/restaurant/${props._id}/overview`}
       className="w-full md:w-1/2 lg:w-1/3"
     >
-      <div className="bg-white p-4 mb-4 w-full rounded-2xl transition duration-700 ease-in-out hover:shadow-lg ">
-        <div className="w-full relative">
+      <div className="bg-white p-4 mb-4 w-full rounded-2xl transition duration-700 ease-in-out hover:shadow-lg  ">
+        <div className="w-full h-full relative">
           <div className=" w-full bottom-4 flex items-end justify-between">
             <div className="flex flex-col gap-2 items-start absolute">
               {props.isPro && (
@@ -43,9 +43,9 @@ function RestaurantCard(props) {
               )}
             </div>
             <img
-              src={image.images.length && image.images[0].location}
+              src={props.CardImage}
               alt="food"
-              className="w-full h-full rounded-2xl"
+              className="w-full h-44 object-fill rounded-2xl md:h-60 sm:h-full "
             />
           </div>
           <div className="my-2 flex flex-col gap-2">
@@ -57,7 +57,7 @@ function RestaurantCard(props) {
             </div>
             <div className="flex overflow-ellipsis items-center text justify-between text-gray-500">
               <p>{props.cuisine.join(", ")}</p>
-              <p>$ {props.averageCost} for one</p>
+              <p>Rs. {props.averageCost} for one</p>
             </div>
           </div>
         </div>

@@ -20,10 +20,11 @@ function Overview() {
   const [menuImages, setMenuImages] = useState({ images: [] });
   const [reviews, setReviews] = useState([]);
   const { id } = useParams();
+  const [restaurantList, setRestaurantList] = useState([]);
+
 
   const reduxState = useSelector(
-    (globalState) => 
-    {
+    (globalState) => {
       console.log("76u7futtv7vt7v7uyvt87iygfxstd", globalState)
       return globalState.restaurant.selectedRestaurant.restaurant
     }
@@ -35,7 +36,7 @@ function Overview() {
     if (reduxState) {
       dispatch(getImage(reduxState?.menuImages)).then((data) => {
         const images = [];
-        data.payload.images.map(({ location }) => images.push(location));
+        data.payload.menuImageses.map(({ location }) => images.push(location));
         setMenuImages(images);
       });
 
@@ -44,6 +45,17 @@ function Overview() {
       );
     }
   }, [reduxState]);
+
+  const reduxRestaurant = useSelector((store) => {
+    console.log(store)
+    return store.restaurant.restaurants;
+  }
+  );
+
+  useEffect(() => {
+    reduxRestaurant.restaurants && setRestaurantList(reduxRestaurant.restaurants);
+  }, [reduxRestaurant.restaurants]);
+  console.log(restaurantList)
 
   const settings = {
     dots: true,
@@ -135,7 +147,14 @@ function Overview() {
               <h4 className="text-lg font-medium">Similar Restaurants</h4>
               <div>
                 <Slider {...settings}>
-                  <MenuSimilarRestaurantCard
+                  {restaurantList.map(restaurant => (
+                    <MenuSimilarRestaurantCard
+                      image={restaurant.CardImage}
+                      title={restaurant.name}
+                    />
+                  ))}
+
+                  {/* <MenuSimilarRestaurantCard
                     image="https://b.zmtcdn.com/data/pictures/chains/3/307893/69f1fa33c357f755f7021b7e35d59380.jpg"
                     title="tea"
                   />
@@ -154,11 +173,7 @@ function Overview() {
                   <MenuSimilarRestaurantCard
                     image="https://b.zmtcdn.com/data/pictures/chains/3/307893/69f1fa33c357f755f7021b7e35d59380.jpg"
                     title="tea"
-                  />
-                  <MenuSimilarRestaurantCard
-                    image="https://b.zmtcdn.com/data/pictures/chains/3/307893/69f1fa33c357f755f7021b7e35d59380.jpg"
-                    title="tea"
-                  />
+                  /> */}
                 </Slider>
               </div>
             </div>
