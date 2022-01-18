@@ -29,7 +29,7 @@ function Signin({ isOpen, setIsOpen }) {
   };
 
   const googleSignIn = () =>
-    (window.location.href = "http://localhost:4000/auth/google");
+    (window.location.href = "https://devtown-zomato-master.herokuapp.com/auth/google");
 
   return (
     <>
